@@ -1,0 +1,43 @@
+<section id="brands" class="brands">
+  <div class="container">
+    <div class="brands__header">
+      <span class="brands__eyebrow">партнёры</span>
+      <h2 class="brands__title">
+        Бренды, которым<br>
+        мы <span class="brands__title-accent">доверяем</span>
+      </h2>
+      <p class="brands__lead">
+        Мы — официальный дилер и прямой партнёр. Это значит оригинальная продукция,
+        заводская гарантия и&nbsp;цена без посредников.
+      </p>
+    </div>
+
+    <div class="brands__grid">
+      @for (brand of brands(); track brand.id) {
+        <article class="brands__card" [style.--card-accent]="brand.accentColor">
+          <header class="brands__card-head">
+            <span class="brands__card-badge">партнёр</span>
+            <span class="brands__card-name">{{ brand.name }}</span>
+          </header>
+
+          <div class="brands__card-visual">
+            <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="196" height="116" rx="12" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+              <text x="100" y="68" text-anchor="middle" font-family="Fraunces, serif" font-size="32" font-style="italic" fill="currentColor">{{ brand.name }}</text>
+            </svg>
+          </div>
+
+          <div class="brands__card-body">
+            <p class="brands__card-tagline">{{ brand.tagline }}</p>
+            <p class="brands__card-desc">{{ brand.description }}</p>
+            <div class="brands__card-tags">
+              @for (cat of brand.category; track cat) {
+                <span class="brands__tag">{{ cat === 'tile' ? 'плитка' : cat === 'porcelain' ? 'керамогранит' : cat === 'sanitary' ? 'сантехника' : cat === 'facade' ? 'фасад' : cat }}</span>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+<section id="ar" class="ar">
+  <div class="container">
+    <div class="ar__header">
+      <span class="ar__eyebrow">AR-примерка</span>
+      <h2 class="ar__title">
+        Примерьте плитку<br>
+        <span class="ar__title-accent">до покупки</span>
+      </h2>
+      <p class="ar__lead">
+        Выберите фактуру — и она «ляжет» на пол прямо в интерьере.
+        На поддерживающих WebXR телефонах откроется AR-режим с&nbsp;камерой.
+      </p>
+    </div>
+
+    <div class="ar__stage">
+      <!-- Превью «комнаты» с наложением плитки -->
+      <div class="ar__device">
+        <div class="ar__device-frame">
+          <div class="ar__room">
+            <div class="ar__room-wall"></div>
+            <div class="ar__room-floor" [style.background]="getFloorStyle()['background']">
+              <div class="ar__room-grain"></div>
+            </div>
+            <div class="ar__room-furniture" aria-hidden="true"></div>
+            <span class="ar__device-badge">предпросмотр</span>
+          </div>
+          <div class="ar__device-notch"></div>
+        </div>
+      </div>
+
+      <!-- Панель управления -->
+      <div class="ar__panel">
+        <div class="ar__panel-label">Выберите плитку</div>
+        <div class="ar__swatches">
+          @for (sw of swatches; track sw.name; let i = $index) {
+            <button
+              type="button"
+              class="ar__swatch"
+              [class.ar__swatch--active]="selected() === i"
+              [style.background]="sw.css"
+              [attr.aria-pressed]="selected() === i"
+              [attr.aria-label]="sw.name"
+              (click)="selectTile(i)"
+            ></button>
+          }
+        </div>
+        <p class="ar__swatch-name">{{ swatches[selected()].name }}</p>
+
+        <button type="button" class="btn btn--primary ar__ar-btn" (click)="launchAr()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M12 12l9-5M12 12v10M12 12L3 7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Запустить AR
+        </button>
+
+        <p class="ar__status" [class.ar__status--warn]="arState() === 'unsupported'">
+          {{ arMessage() }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

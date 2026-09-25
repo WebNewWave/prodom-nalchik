@@ -1,0 +1,88 @@
+<section id="configurator" class="config">
+  <div class="container">
+    <header class="config__header">
+      <span class="config__eyebrow">конфигуратор</span>
+      <h2 class="config__title">
+        Соберите ванную<br>
+        <span class="config__title-accent">за 60 секунд</span>
+      </h2>
+      <p class="config__lead">
+        Выберите пол, стены, сантехнику и аксессуары. Увидите результат в реальном времени.
+        Готовый набор можно отправить нам — посчитаем стоимость и доставим.
+      </p>
+    </header>
+
+    <div class="config__board">
+      <div class="config__preview" aria-live="polite">
+        <div class="config__preview-room">
+          <div class="config__preview-wall" [style]="getWallStyle()"></div>
+          <div class="config__preview-floor" [style]="getFloorStyle()">
+            <div class="config__preview-floor-lines"></div>
+          </div>
+          <div class="config__preview-bath">
+            <div class="config__preview-bath-tub">
+              <div class="config__preview-bath-water"></div>
+            </div>
+          </div>
+          <div class="config__preview-mirror" [class.config__preview-mirror--led]="getAccessoryName().includes('LED')">
+            <div class="config__preview-mirror-glow" [class.config__preview-mirror-glow--on]="getAccessoryName().includes('LED')"></div>
+          </div>
+          <div class="config__preview-toilet" [class.config__preview-toilet--black]="getSanitaryName().includes('чёрн')">
+            <div class="config__preview-toilet-tank"></div>
+            <div class="config__preview-toilet-bowl"></div>
+          </div>
+        </div>
+
+        <div class="config__preview-meta">
+          <div class="config__preview-meta-item">
+            <span class="config__preview-meta-label">Пол</span>
+            <span class="config__preview-meta-value">{{ steps()[0].tiles[selection().floor] }}</span>
+          </div>
+          <div class="config__preview-meta-item">
+            <span class="config__preview-meta-label">Стены</span>
+            <span class="config__preview-meta-value">{{ steps()[1].tiles[selection().wall] }}</span>
+          </div>
+          <div class="config__preview-meta-item">
+            <span class="config__preview-meta-label">Сантехника</span>
+            <span class="config__preview-meta-value">{{ getSanitaryName() }}</span>
+          </div>
+          <div class="config__preview-meta-item">
+            <span class="config__preview-meta-label">Акцент</span>
+            <span class="config__preview-meta-value">{{ getAccessoryName() }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="config__controls">
+        @for (step of steps(); track step.categoryId; let idx = $index) {
+          <fieldset class="config__step" [style.--step-accent]="step.accent">
+            <legend class="config__step-label">
+              <span class="config__step-num">0{{ idx + 1 }}</span>
+              {{ step.label }}
+            </legend>
+            <div class="config__tiles">
+              @for (tile of step.tiles; track tile; let tileIdx = $index) {
+                <button
+                  type="button"
+                  class="config__tile"
+                  [class.config__tile--active]="selection()[step.categoryId] === tileIdx"
+                  (click)="selectTile(step.categoryId, tileIdx)"
+                  [attr.aria-pressed]="selection()[step.categoryId] === tileIdx"
+                >
+                  {{ tile }}
+                </button>
+              }
+            </div>
+          </fieldset>
+        }
+
+        <a href="#contacts" class="btn btn--primary config__cta">
+          Получить расчёт по этому набору
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8h10m0 0L8 3m5 5L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

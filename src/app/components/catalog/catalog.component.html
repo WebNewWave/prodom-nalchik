@@ -1,0 +1,45 @@
+<section id="catalog" class="catalog">
+  <div class="container">
+    <div class="catalog__header">
+      <div class="catalog__head-left">
+        <span class="catalog__eyebrow">каталог</span>
+        <h2 class="catalog__title">
+          Всё для ремонта<br>
+          <span class="catalog__title-accent">под одной крышей</span>
+        </h2>
+      </div>
+      <p class="catalog__lead">
+        Более 1&nbsp;300 позиций в наличии на&nbsp;складе в&nbsp;Нальчике.
+        Приезжайте в&nbsp;шоурум — покажем, подберём и&nbsp;рассчитаем смету бесплатно.
+      </p>
+    </div>
+
+    <div class="catalog__grid">
+      @for (cat of categories(); track cat.id) {
+        <article
+          class="catalog__card"
+          [style.--card-accent]="cat.accentColor"
+          tabindex="0"
+        >
+          <div class="catalog__card-top">
+            <span class="catalog__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path [attr.d]="cat.symbol" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="catalog__card-count">{{ cat.itemCount }}+</span>
+          </div>
+          <h3 class="catalog__card-name">{{ cat.name }}</h3>
+          <p class="catalog__card-tagline">{{ cat.tagline }}</p>
+          <p class="catalog__card-desc">{{ cat.description }}</p>
+          <span class="catalog__card-link">
+            Подробнее
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8h10m0 0L8 3m5 5L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </article>
+      }
+    </div>
+  </div>
+</section>

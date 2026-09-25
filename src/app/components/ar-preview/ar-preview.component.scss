@@ -1,0 +1,212 @@
+.ar {
+  padding: var(--space-10) 0;
+  background: var(--surface-dark);
+  color: var(--text-on-dark);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(232, 93, 31, 0.22), transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+}
+
+.ar__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 640px;
+  margin-bottom: var(--space-9);
+}
+
+.ar__eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-terra);
+  font-weight: 600;
+}
+
+.ar__title {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 300;
+  color: var(--text-on-dark);
+}
+
+.ar__title-accent {
+  font-style: italic;
+  color: var(--accent-primary);
+}
+
+.ar__lead {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text-on-dark-muted);
+}
+
+.ar__stage {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+/* === Устройство / комната === */
+.ar__device {
+  display: flex;
+  justify-content: center;
+}
+
+.ar__device-frame {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  aspect-ratio: 320 / 600;
+  background: #05040A;
+  border-radius: 38px;
+  padding: 14px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+}
+
+.ar__device-notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 18px;
+  background: #05040A;
+  border-radius: 0 0 12px 12px;
+  z-index: 3;
+}
+
+.ar__room {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2A2722 0%, #1A1818 100%);
+}
+
+.ar__room-wall {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 52%;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 40px);
+}
+
+.ar__room-floor {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 48%;
+  transform: perspective(380px) rotateX(52deg);
+  transform-origin: bottom;
+  background-size: cover;
+  transition: background var(--duration-slow) var(--ease-out);
+}
+
+.ar__room-grain {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), transparent 30%);
+}
+
+.ar__room-furniture {
+  position: absolute;
+  bottom: 24%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46%;
+  height: 26%;
+  background: linear-gradient(180deg, #C9A35E, #9C7A3E);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+}
+
+.ar__device-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.4);
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(6px);
+}
+
+/* === Панель === */
+.ar__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ar__panel-label {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-on-dark-muted);
+}
+
+.ar__swatches {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+}
+
+.ar__swatch {
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  background-size: cover;
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+
+  &:hover { transform: translateY(-3px); }
+  &--active {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(232, 93, 31, 0.3);
+  }
+}
+
+.ar__swatch-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-on-dark);
+}
+
+.ar__ar-btn {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+}
+
+.ar__status {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-on-dark-muted);
+  border-left: 2px solid var(--accent-sage);
+  padding-left: var(--space-4);
+
+  &--warn { border-left-color: var(--accent-terra); color: #E9C9A8; }
+}
+
+@media (max-width: 899px) {
+  .ar__stage { grid-template-columns: 1fr; gap: var(--space-7); }
+  .ar__panel { order: 2; }
+}

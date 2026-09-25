@@ -1,0 +1,40 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__logo">PRODOM</span>
+        <p class="footer__tagline">
+          Торговый центр качественных отделочных материалов в&nbsp;Нальчике.
+          Плитка, керамогранит, сантехника, двери, фасадные решения.
+        </p>
+        <a class="footer__ig" [href]="profileUrl" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>
+          </svg>
+          &#64;prodom.nalchik
+        </a>
+      </div>
+
+      <nav class="footer__nav" aria-label="Навигация">
+        <span class="footer__nav-title">Навигация</span>
+        @for (item of nav; track item.href) {
+          <a class="footer__nav-link" [routerLink]="item.href">{{ item.label }}</a>
+        }
+      </nav>
+
+      <div class="footer__contacts">
+        <span class="footer__nav-title">Контакты</span>
+        <a class="footer__contact-link" [href]="phoneHref">{{ phone }}</a>
+        <span class="footer__contact-text">г. Нальчик, ул. Атажукина, 107</span>
+        <span class="footer__contact-text">Ежедневно 9:00 – 19:00</span>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© {{ year }} PRODOM. Все права защищены.</span>
+      <span class="footer__bottom-note">Сделано с заботой о вашем ремонте 🧱</span>
+    </div>
+  </div>
+</footer>

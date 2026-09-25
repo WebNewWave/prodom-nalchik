@@ -1,0 +1,144 @@
+<section id="contacts" class="contact">
+  <div class="container">
+    <div class="contact__grid">
+      <!-- Левая колонка: инфо -->
+      <div class="contact__info">
+        <span class="contact__eyebrow">контакты</span>
+        <h2 class="contact__title">
+          Приходите в&nbsp;шоурум<br>
+          <span class="contact__title-accent">или напишите нам</span>
+        </h2>
+        <p class="contact__lead">
+          Покажем материалы вживую, поможем с&nbsp;расчётом и&nbsp;оформим доставку.
+        </p>
+
+        <ul class="contact__list">
+          <li class="contact__item">
+            <span class="contact__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z" stroke="currentColor" stroke-width="1.6"/>
+                <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+            </span>
+            <div>
+              <span class="contact__item-label">Адрес</span>
+              <span class="contact__item-value">{{ address }}</span>
+            </div>
+          </li>
+          <li class="contact__item">
+            <span class="contact__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 4h3l2 5-2 1a12 12 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <span class="contact__item-label">Телефон</span>
+              <a class="contact__item-value contact__item-link" [href]="phoneHref">{{ phone }}</a>
+            </div>
+          </li>
+          <li class="contact__item">
+            <span class="contact__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <span class="contact__item-label">Режим работы</span>
+              <span class="contact__item-value">{{ hours }}</span>
+            </div>
+          </li>
+          <li class="contact__item">
+            <span class="contact__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" stroke="currentColor" stroke-width="1.6"/>
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+                <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>
+              </svg>
+            </span>
+            <div>
+              <span class="contact__item-label">Instagram</span>
+              <a class="contact__item-value contact__item-link" [href]="profileUrl" target="_blank" rel="noopener">&#64;prodom.nalchik</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact__map" aria-label="Схема расположения магазина">
+          <div class="contact__map-pin">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z" fill="var(--accent-primary)"/>
+              <circle cx="12" cy="10" r="2.5" fill="#fff"/>
+            </svg>
+            <span>PRODOM · Атажукина 107</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Правая колонка: форма -->
+      <div class="contact__form-wrap">
+        @if (!submitted()) {
+          <form class="contact__form" (ngSubmit)="submit()" #form="ngForm">
+            <h3 class="contact__form-title">Заявка на расчёт</h3>
+            <p class="contact__form-sub">Ответим в тот же день в WhatsApp</p>
+
+            <label class="contact__field">
+              <span class="contact__field-label">Имя</span>
+              <input
+                type="text"
+                name="name"
+                [(ngModel)]="name"
+                placeholder="Как к вам обращаться?"
+                autocomplete="name"
+              >
+            </label>
+
+            <label class="contact__field">
+              <span class="contact__field-label">Телефон</span>
+              <input
+                type="tel"
+                name="phone"
+                [(ngModel)]="userPhone"
+                placeholder="+7 (___) ___-__-__"
+                autocomplete="tel"
+              >
+            </label>
+
+            <label class="contact__field">
+              <span class="contact__field-label">Что ищете?</span>
+              <textarea
+                name="message"
+                rows="3"
+                [(ngModel)]="message"
+                placeholder="Плитка для ванной, керамогранит на пол, сантехника…"
+              ></textarea>
+            </label>
+
+            <button type="submit" class="btn btn--primary contact__submit">
+              Отправить в WhatsApp
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 8h10m0 0L8 3m5 5L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <p class="contact__form-note">Нажимая кнопку, вы перейдёте в WhatsApp с готовым сообщением.</p>
+          </form>
+        } @else {
+          <div class="contact__success">
+            <div class="contact__success-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="contact__success-title">Готово!</h3>
+            <p class="contact__success-text">
+              Открыли WhatsApp с&nbsp;вашим сообщением. Если окно не&nbsp;появилось —
+              напишите нам сами: <a [href]="waHref" target="_blank" rel="noopener">{{ phone }}</a>
+            </p>
+            <button type="button" class="btn btn--secondary contact__success-btn" (click)="reset()">
+              Отправить ещё одну заявку
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

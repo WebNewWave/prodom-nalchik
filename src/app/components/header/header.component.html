@@ -1,0 +1,43 @@
+<header class="header" [class.header--scrolled]="isScrolled()">
+  <div class="container header__inner">
+    <a routerLink="/" class="header__logo" (click)="closeMenu()">
+      <span class="header__logo-mark">PRODOM</span>
+      <span class="header__logo-sub">Нальчик · ТЦ отделочных материалов</span>
+    </a>
+
+    <nav class="header__nav" [class.header__nav--open]="isMenuOpen()">
+      @for (item of navItems; track item.href) {
+        <a
+          [routerLink]="item.href"
+          routerLinkActive="header__nav-link--active"
+          [routerLinkActiveOptions]="{ exact: !!item.exact }"
+          class="header__nav-link"
+          (click)="closeMenu()"
+        >
+          {{ item.label }}
+        </a>
+      }
+      <a href="tel:+79640303039" class="btn btn--primary header__cta-mobile">
+        Позвонить
+      </a>
+    </nav>
+
+    <div class="header__actions">
+      <a href="tel:+79640303039" class="header__phone">
+        +7 (964) 030-30-39
+      </a>
+      <a href="#contacts" class="btn btn--primary header__cta">
+        Получить расчёт
+      </a>
+      <button
+        class="header__burger"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="isMenuOpen()"
+        aria-label="Меню"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
