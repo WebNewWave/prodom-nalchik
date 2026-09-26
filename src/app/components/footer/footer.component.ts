@@ -18,8 +18,6 @@ export class FooterComponent {
   readonly nav = [
     { href: '/#catalog', label: 'Каталог' },
     { href: '/#brands', label: 'Бренды' },
-    { href: '/#configurator', label: 'Конфигуратор' },
-    { href: '/#ar', label: 'AR-примерка' },
     { href: '/#contacts', label: 'Контакты' }
   ];
 }

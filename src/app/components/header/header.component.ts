@@ -17,8 +17,6 @@ export class HeaderComponent {
     { href: '/', label: 'Главная', exact: true },
     { href: '/#catalog', label: 'Каталог', exact: false },
     { href: '/#brands', label: 'Бренды', exact: false },
-    { href: '/#configurator', label: 'Конфигуратор', exact: false },
-    { href: '/#ar', label: 'AR-примерка', exact: false },
     { href: '/#contacts', label: 'Контакты', exact: false }
   ] as const;
 
