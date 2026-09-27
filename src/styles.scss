@@ -78,6 +78,19 @@ html {
   text-size-adjust: 100%;
 }
 
+// Клиппуем горизонтальный оверфлоу (закрытое бургер-меню уезжает за правый край
+// через translateX(100%) и иначе даёт горизонтальный скролл на телефоне).
+// clip (не hidden) не создаёт scroll-контейнер, поэтому position: sticky шапки работает.
+html, body {
+  overflow-x: clip;
+}
+
+// Блокировка прокрутки фона, когда открыто мобильное меню.
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);

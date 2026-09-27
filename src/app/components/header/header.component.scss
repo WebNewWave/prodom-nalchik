@@ -3,11 +3,23 @@
   top: 0;
   z-index: 100;
   background: transparent;
-  transition: background var(--duration-base) var(--ease-out),
-              box-shadow var(--duration-base) var(--ease-out);
+
+  // Frosted-фон вынесен в ::before, чтобы backdrop-filter НЕ создавал
+  // containing block для position: fixed потомков (иначе открытое меню
+  // «уезжает» при скролле страницы вместо того, чтобы быть привязанным к вьюпорту).
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: transparent;
+    transition: background var(--duration-base) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                backdrop-filter var(--duration-base) var(--ease-out);
+  }
 }
 
-.header--scrolled {
+.header--scrolled::before {
   background: rgba(250, 250, 247, 0.85);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -134,9 +146,13 @@
     padding: var(--space-9) var(--space-5);
     transform: translateX(100%);
     transition: transform var(--duration-slow) var(--ease-out);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: none;
 
     &--open {
       transform: translateX(0);
+      pointer-events: auto;
     }
   }
 
@@ -155,4 +171,14 @@
   .header__phone { display: none; }
   .header__cta { display: none; }
   .header__burger { display: flex; }
+
+  // Открытое меню — fixed на весь экран и перекрывает шапку.
+  // Держим логотип и бургер выше оверлея, чтобы бургер закрывал меню.
+  .header__nav { z-index: 1; }
+
+  .header__logo,
+  .header__actions {
+    position: relative;
+    z-index: 2;
+  }
 }

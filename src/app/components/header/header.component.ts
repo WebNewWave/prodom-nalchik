@@ -1,4 +1,4 @@
-import { Component, signal, HostListener } from '@angular/core';
+import { Component, effect, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -19,6 +19,15 @@ export class HeaderComponent {
     { href: '/#brands', label: 'Бренды', exact: false },
     { href: '/#contacts', label: 'Контакты', exact: false }
   ] as const;
+
+  constructor() {
+    // Блокируем прокрутку фона, пока открыто мобильное меню.
+    effect(() => {
+      const open = this.isMenuOpen();
+      document.documentElement.classList.toggle('menu-open', open);
+      document.body.classList.toggle('menu-open', open);
+    });
+  }
 
   @HostListener('window:scroll')
   onScroll(): void {
